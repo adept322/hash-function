@@ -5,13 +5,7 @@ using namespace std;
 
 int get_symbol(int symbol)
 {
-	int key = 112233445566778899;
-	if (symbol > 26)
-		symbol == symbol % 26 + 64;
-	else
-		symbol = (symbol * key) % 26 + 64;
-
-	
+	symbol = symbol % 26 + 65;
 	return symbol;
 }
 
@@ -30,4 +24,4 @@ int main()
 
 
 
-//64 90  26	
+//64 90  26	265
