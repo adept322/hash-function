@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int get_symbol(int symbol)
+{
+	int key = 112233445566778899;
+	if (symbol > 26)
+		symbol == symbol % 26 + 64;
+	else
+		symbol = (symbol * key) % 26 + 64;
+
+	
+	return symbol;
+}
+
+int main()
+{
+	int var = 0;
+	cout << "Enter number: ";
+	cin >> var;
+	char s = get_symbol(var);
+	cout << "Symbol: " << s << endl;
+
+
+	system("pause");
+	return 0;
+}
+
+
+
+//64 90  26	
