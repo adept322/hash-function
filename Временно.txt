@@ -42,6 +42,72 @@ int main()
 	system("pause");
 	return 0;
 }
+---------------------------------------------
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int get_symbol(int symbol,int i)
+{
+	char csymbol;
+	if (i == 0)
+	{
+		csymbol = symbol % 26 + 65;
+	}
+	else
+	{
+		csymbol = symbol %32 + 
+	}
+	csymbol = symbol % 26 + 65;
+	return csymbol;
+}
+
+int get_number(char symbol)
+{
+	int number = symbol;
+	return number;
+}
+
+string get_hash(string word)
+{
+	string hash = word;
+	const short int hash_key = 746;
+	long int buf_num = 0;
+	int count = 0;
+	for (int i = 0; i < word.length(); i++)
+	{
+		count = i;
+		if (count == 3)
+		{
+			buf_num = get_number(word[i])*(word.length() - i)*hash_key;
+			hash[i] = get_symbol(buf_num);
+		}
+		else
+		{
+
+		}
+		
+	}
+	return hash;
+}
+
+int main()
+{
+	string word;
+	cout << "Enter word: ";
+	cin >> word;
+	cout << "Hash:  " << get_hash(word);
+
+
+
+
+	system("pause");
+	return 0;
+}
+
+
+
 
 
 
