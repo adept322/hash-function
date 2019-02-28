@@ -5,17 +5,38 @@ using namespace std;
 
 int get_symbol(int symbol)
 {
-	symbol = symbol % 26 + 65;
-	return symbol;
+	char csymbol;
+	csymbol = symbol % 26 + 65;
+	return csymbol;
+}
+
+int get_number(char symbol)
+{
+	int number = symbol;
+	return number;
+}
+
+string get_hash(string word)
+{
+	string hash;
+	const short int hash_key = 746;
+	long int buf_num = 0;
+	for (int i = 0; i < word.length(); i++)
+	{
+		buf_num = get_number(word[i])*(word.length() - i)*hash_key;
+		hash[i] = get_symbol(buf_num);
+	}
+	return hash;
 }
 
 int main()
 {
-	int var = 0;
-	cout << "Enter number: ";
-	cin >> var;
-	char s = get_symbol(var);
-	cout << "Symbol: " << s << endl;
+	string word;
+	cout << "Enter word: ";
+	cin >> word;
+	cout << "Hash:  " << get_hash(word);
+
+
 
 
 	system("pause");
@@ -24,4 +45,3 @@ int main()
 
 
 
-//64 90  26	265
