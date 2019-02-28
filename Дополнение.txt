@@ -1,0 +1,46 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <ctime>
+
+using namespace std;
+
+int get_symbol(int symbol)
+{
+	char csymbol;
+	csymbol = symbol % 26 + 65;
+	return csymbol;
+}
+
+int get_number(char symbol)
+{
+	int number = symbol;
+	return number;
+}
+
+int main()
+{
+	srand(time(NULL));
+	vector<int> arr;
+	string word;
+	short int size = 0;
+	int rand_var = 0;
+	char symbol = ' ';
+	cin >> size;
+	for (int i = 0; i < size; i++)
+	{
+		rand_var = rand() % 2147483647;
+		arr.push_back(rand_var);
+	}
+	for (int i = 0; i < arr.size(); i++)
+	{
+		symbol = get_symbol(arr[i]);
+		word.push_back(symbol);
+	}
+	cout << word << endl;
+	system("pause");
+	return 0;
+}
+
+
+
