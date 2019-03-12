@@ -5,7 +5,7 @@
 
 using namespace std;
 
-int get_symbol(int symbol)
+char get_symbol(int symbol)
 {
 	char csymbol;
 	csymbol = symbol % 26 + 65;
@@ -25,6 +25,7 @@ int main()
 	string word;
 	short int size = 0;
 	int rand_var = 0;
+	int buf = 0;
 	char symbol = ' ';
 	cin >> size;
 	for (int i = 0; i < size; i++)
@@ -34,8 +35,15 @@ int main()
 	}
 	for (int i = 0; i < arr.size(); i++)
 	{
-		symbol = get_symbol(arr[i]);
-		word.push_back(symbol);
+		if (arr[i] % 7 == 0)
+		{
+			word.push_back(get_symbol((arr[i] / 7) % 10 + 48));
+		}
+		else
+		{
+			word.push_back(get_symbol(arr[i]));
+		}
+		
 	}
 	cout << word << endl;
 	system("pause");
