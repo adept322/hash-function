@@ -5,17 +5,24 @@
 
 using namespace std;
 
-char get_symbol(int symbol)
+char GetSymbol(int symbol)
 {
 	char csymbol;
 	csymbol = symbol % 26 + 65;
 	return csymbol;
 }
 
-int get_number(char symbol)
+int GetNumber(char symbol)
 {
 	int number = symbol;
 	return number;
+}
+
+char GetVar(int symbol)
+{
+	char csymbol;
+	csymbol = symbol % 10 + 48;
+	return csymbol;
 }
 
 int main()
@@ -37,13 +44,13 @@ int main()
 	{
 		if (arr[i] % 7 == 0)
 		{
-			word.push_back(get_symbol((arr[i] / 7) % 10 + 48));
+			word.push_back(GetVar(arr[i] / 7));
 		}
 		else
 		{
-			word.push_back(get_symbol(arr[i]));
+			word.push_back(GetSymbol(arr[i]));
 		}
-		
+
 	}
 	cout << word << endl;
 	system("pause");
