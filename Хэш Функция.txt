@@ -4,10 +4,6 @@
 #include <ctime>
 
 using namespace std;
-
-
-
-
 char GetSymbol(int symbol)
 {
 	char csymbol;
@@ -28,29 +24,36 @@ char GetVar(int symbol)
 	return csymbol;
 }
 
-string Hash(string word)
+string GetHash(string word)
 {
-	string hash = word;
-	int size = 20;
-	vector<int> arr;
-	int rand_var = 0;
-	for (int i = 0; i < size; i++)
+	if (word.length() > 20)
 	{
-		rand_var = rand() % 2147483647;
-		arr.push_back(rand_var);
+		return "@error@";
 	}
-	for (int i = 0; i < arr.size(); i++)
+	else
 	{
-		if (arr[i] % 7 == 0)
+		string hash = word;
+		int size = word.length();
+		vector<int> arr;
+		int rand_var = 0;
+		for (int i = 0; i < size; i++)
 		{
-			word.push_back(GetVar(arr[i] / 7));
+			rand_var = (int)word[i];
+			arr.push_back(rand_var);
 		}
-		else
+		for (int i = 0; i < arr.size(); i++)
 		{
-			word.push_back(GetSymbol(arr[i]));
+			if (arr[i] % 7 == 0)
+			{
+				hash.push_back(GetVar(arr[i] / 7));
+			}
+			else
+			{
+				hash.push_back(GetSymbol(arr[i]));
+			}
 		}
+		return hash;
 	}
-	return hash;
 }
 
 
@@ -59,8 +62,8 @@ int main()
 	srand(time(NULL));
 	string word;
 	cin >> word;
-	
-	cout << Hash(word) << endl;
+
+	cout << GetHash(word) << endl;
 	system("pause");
 	return 0;
 }
