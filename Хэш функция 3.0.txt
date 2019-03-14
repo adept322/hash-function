@@ -1,0 +1,72 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <ctime>
+
+using namespace std;
+char GetSymbol(int symbol)
+{
+	char csymbol;
+	csymbol = symbol % 26 + 65;
+	return csymbol;
+}
+
+int GetNumber(char symbol)
+{
+	int number = symbol;
+	return number;
+}
+
+char GetVar(int symbol)
+{
+	char csymbol;
+	csymbol = symbol % 10 + 48;
+	return csymbol;
+}
+
+string GetHash(string word)
+{
+	if (word.length() > 16)
+	{
+		return "@error@";
+	}
+	else
+	{
+		string hash;
+		int size = word.length();
+		vector<int> arr;
+		int rand_var = 0;
+		for (int i = 0; i < size; i++)
+		{
+			rand_var = (int)word[i];
+			arr.push_back(rand_var);
+		}
+		for (int i = 0; i < arr.size(); i++)
+		{
+			if (arr[i] % 7 == 0)
+			{
+				hash.push_back(GetVar(arr[i] / 7));
+			}
+			else
+			{
+				hash.push_back(GetSymbol(arr[i]));
+			}
+		}
+		return hash;
+	}
+}
+
+
+int main()
+{
+	srand(time(NULL));
+	string word;
+	cin >> word;
+
+	cout << GetHash(word) << endl;
+	system("pause");
+	return 0;
+}
+
+
+
