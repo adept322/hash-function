@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <ctime>
+#include <Windows.h>
 
 using namespace std;
 char GetSymbol(int symbol)
@@ -32,21 +33,27 @@ string GetHash(string word)
 	}
 	else
 	{
-		int ValidSize = 16;
 		string hash;
+		string salt = "safe";
 		int size = word.length();
-		vector<int> arr;
 		int rand_var = 0;
-		for (int i = 0; i < ValidSize; i++)
+		int Vsize = 16;
+		vector<int> arr;
+		int num[20] = {13,23,54,756,2,34,12,87,87,456,34,23,76,89,23,54,23,54,65,32};
+		for (int i = 0; i < Vsize; i++)
 		{
-			if(i == size)
+			if (i == size)
 			{
-			   ValidSize = ValidSize - i;
-			   i = 0;
+				Vsize = Vsize - i;
+				i = 0;
 			}
-			rand_var = (int)word[i];
-			arr.push_back(rand_var);
+			arr.push_back((int)word[i] * num[i] * (Vsize - i)*size);
 		}
+		for (int j = 0; j < salt.length(); j++)
+		{
+			arr.push_back((int)salt[j] * num[j] * (salt.length() - j) *size);
+		}
+		
 		for (int i = 0; i < arr.size(); i++)
 		{
 			if (arr[i] % 7 == 0)
@@ -67,10 +74,15 @@ int main()
 {
 	srand(time(NULL));
 	string word;
-	cin >> word;
+	while (true)
+	{
+		system("cls");
+		cin >> word;
+		cout << GetHash(word) << endl;
+		system("pause");
+	}
 
-	cout << GetHash(word) << endl;
-	system("pause");
+	
 	return 0;
 }
 
