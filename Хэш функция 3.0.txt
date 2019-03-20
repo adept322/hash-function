@@ -5,67 +5,39 @@
 #include <Windows.h>
 
 using namespace std;
-char GetSymbol(int symbol)
-{
-	char csymbol;
-	csymbol = symbol % 26 + 65;
-	return csymbol;
-}
-
-int GetNumber(char symbol)
-{
-	int number = symbol;
-	return number;
-}
-
-char GetVar(int symbol)
-{
-	char csymbol;
-	csymbol = symbol % 10 + 48;
-	return csymbol;
-}
 
 string GetHash(string word)
 {
-	if (word.length() > 16)
+	if (word.length() > 16 or word.length() < 8)
 	{
 		return "@error@";
 	}
 	else
 	{
-		string hash;
-		string salt = "safe";
-		int size = word.length();
-		int rand_var = 0;
-		int Vsize = 16;
+		string Hash;
+		string Salt = "safe";
+		int Size = 16;
 		vector<int> arr;
-		int num[20] = {13,23,54,756,2,34,12,87,87,456,34,23,76,89,23,54,23,54,65,32};
-		for (int i = 0; i < Vsize; i++)
+		int num[20] = { 13,23,54,756,2,34,12,87,87,456,34,23,76,89,23,54,23,54,65,32 };
+		for (int i = 0; i < Size; i++)
 		{
-			if (i == size)
+			if (i == word.length())
 			{
-				Vsize = Vsize - i;
+				Size = Size - i;
 				i = 0;
 			}
-			arr.push_back((int)word[i] * num[i] * (Vsize - i)*size);
+			arr.push_back((int)word[i] * num[i] * (Size - i) * word.length());
 		}
-		for (int j = 0; j < salt.length(); j++)
-		{
-			arr.push_back((int)salt[j] * num[j] * (salt.length() - j) *size);
-		}
-		
+		for (int i = 0; i < Salt.length(); i++)
+			arr.push_back((int)Salt[i] * num[i] * (Salt.length() - i) * word.length());
 		for (int i = 0; i < arr.size(); i++)
 		{
 			if (arr[i] % 7 == 0)
-			{
-				hash.push_back(GetVar(arr[i] / 7));
-			}
+				Hash.push_back((arr[i] / 7) % 10 + 48);
 			else
-			{
-				hash.push_back(GetSymbol(arr[i]));
-			}
+				Hash.push_back((arr[i]) % 26 + 65);	
 		}
-		return hash;
+		return Hash;
 	}
 }
 
@@ -82,7 +54,7 @@ int main()
 		system("pause");
 	}
 
-	
+
 	return 0;
 }
 
