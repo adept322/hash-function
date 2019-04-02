@@ -1,0 +1,71 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <ctime>
+#include <Windows.h>
+
+using namespace std;
+
+string GetHash(string word)
+{
+	if (word.length() > 16 or word.length() < 8)
+	{
+		return "@error@";
+	}
+	else
+	{
+		string Hash;
+		string Salt = "safe";
+		int Size = 16;
+		vector<unsigned long int> arr;
+		int num[20] = { 13,23,54,756,2,34,12,87,84,456,34,23,76,89,23,54,23,54,65,32 };
+		for (int i = 0; i < Size; i++)
+		{
+			if (i == word.length())
+			{
+				Size = Size - i;
+				i = 0;
+			}
+			arr.push_back((int)word[i] * num[i] * (Size - i) * i * i);
+		}
+		for (int i = 0; i < Salt.length(); i++)
+			arr.push_back((int)Salt[i] * num[i] * (Salt.length() - i) * i * i * i);
+		int var = 0;
+		unsigned long int arr_i = 0;
+		for (int i = 0; i < arr.size(); i++)
+		{
+			arr_i = arr[i];
+			if(arr[i]  % 3 == 0)
+			{
+				var = (arr[i]) % 25 + 65;
+				Hash.push_back((arr[i]) % 25 + 65);
+			}
+			else
+			{
+				var = (arr[i]) % 25 + 97;
+				Hash.push_back((arr[i]) % 25 + 97);
+			}
+		}
+		return Hash;
+	}
+}
+
+
+int main()
+{
+	srand(time(NULL));
+	string word;
+	while (true)
+	{
+		system("cls");
+		cin >> word;
+		cout << GetHash(word) << endl;
+		system("pause");
+	}
+
+
+	return 0;
+}
+
+
+
