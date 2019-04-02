@@ -1,4 +1,4 @@
-#include <iostream>
+=#include <iostream>
 #include <string>
 #include <vector>
 #include <ctime>
@@ -30,12 +30,21 @@ string GetHash(string word)
 		}
 		for (int i = 0; i < Salt.length(); i++)
 			arr.push_back((int)Salt[i] * num[i] * (Salt.length() - i) * ((i - 2) *(i * i * i)));
+		int var = 0;
+		unsigned long int arr_i = 0;
 		for (int i = 0; i < arr.size(); i++)
 		{
-			if(arr[i] % 36 == 0)
-				Hash.push_back((arr[i] / 18) % 10 + 48);
+			arr_i = arr[i];
+			if (arr[i] + 1 % 36 == 0)
+			{
+				var = (arr[i] / 36) % 10 + 48;
+				Hash.push_back((arr[i] / 36) % 10 + 47);
+			}
 			else
+			{
+				var = (arr[i]) % 25 + 65;
 				Hash.push_back((arr[i]) % 25 + 65);
+			}
 		}
 		return Hash;
 	}
